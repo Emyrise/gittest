@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+  <form-beans >
+    <form-bean name="loginForm" type="com.yourcompany.struts.form.LoginForm" />
+    <form-bean name="numberForm" type="com.yourcompany.struts.form.NumberForm" />
+
+  </form-beans>
+
+  <global-exceptions />
+  <global-forwards />
+  <action-mappings >
+   <!-- 
+   		attribute:当前action可以使用的实体类
+   		name:学名，可用可不用
+   		path:相当于struts2中action的name
+   		type:相当于struts2中action的class
+    -->
+    <action
+   
+      attribute="loginForm"
+      name="loginForm"
+      path="/login"
+      scope="request"
+      type="com.yourcompany.struts.action.LoginAction">
+      <forward
+        name="ok"
+        path="/ok.jsp"
+        redirect="true" />
+      <forward name="error" path="/login.jsp" />
+    </action>
+    <action
+      attribute="numberForm"
+      input="/ok.jsp"
+      name="numberForm"
+      parameter="methodName"
+      path="/number"
+      scope="request"
+      type="com.yourcompany.struts.action.NumberAction">
+      <forward name="ok" path="/cal.jsp" />
+    </action>
+
+  </action-mappings>
+
+  <message-resources parameter="com.yourcompany.struts.ApplicationResources" />
+</struts-config>
+
